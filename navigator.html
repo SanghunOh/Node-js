@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>navigator</title>
+</head>
+
+<body>
+    <script>
+        console.dir(navigator);
+        console.dir(navigator.appName);
+        console.dir(navigator.appVersion);
+        console.log(navigator.userAgent);
+        console.log(navigator.platform);
+
+        //////////////
+        //객체의 메소드가 없다면 if문 실행 있으면 그 객체 사용
+
+        if(!Object.keys){
+            Object.keys = (function (){
+                'use strict';
+                var hasOwnProperty = Object.prototype.hasOwnProperty,
+                    hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+                    dontEnums = [
+                        'toString',
+                        'toLocaleString',
+                        'valueOf',
+                        'hasOwnProperty',
+                        'isPrototypeOf',
+                        'propertyIsEnumerable',
+                        'constructor'
+                    ],
+                    dontEnumLength = dontEnums.lenght;
+
+                return function(obj){
+                    if(typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)){
+                        throw new TypeError('Object.keys called on non-object');
+                    }
+                    var result = [], prop, i;
+
+                    for(prop in obj){
+                        if(hasOwnProperty.call(obj, prop)){
+                            result.push(prop);
+                        }
+                    }
+
+                    if(hasDontEnumBug){
+                        for(i=0 ; i<dontEnumLength ; i++){
+                            if(hasOwnProperty.call(obj, dontEnums[i])){
+                                result.push(dontEnums[i]);
+                            }
+                        }
+                    }
+                    return result;
+                };
+            }());
+        }
+
+    </script>
+</body>
+</html>
