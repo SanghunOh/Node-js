@@ -8,23 +8,24 @@
             $(document).ready(function(){
                 //위임방식
                 $("#table_test tbody").on("mousedown mouseup", "tr", function(e){
+                    console.log(this);
                     if(e.type == "mousedown"){
-                        $(this).css({"color": "blue","font_weight":"bold"});
+                        $(this).css({"color": "blue","font-weight":"bold"});
                     }else{
                         $(this).css({"color":"","font-weight":""});
                     }
                 });
 
                 //직접할당 방식
-                $("#table_test tbody tr").on("mousedown mouseup", function(e){
+/*                $("#table_test tbody tr").on("mousedown mouseup", function(e){
                     if(e.type == "mousedown"){
-                        $(this).css({"color":"blue","font_weight": "bold"});
+                        $(this).css({"color":"blue","font-weight": "bold"});
                     }
                     else{
-                        $(this).css({"color":"","font_weight":""});
+                        $(this).css({"color":"","font-weight":""});
                     }
                 });
-
+*/
                 $("<tr><td>Bruce</td><td>La</td><td>89</td></tr>").appendTo("#table_test tbody");
             });
         </script>
